@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.testtask.movieapplication.R
 import com.testtask.movieapplication.presentation.ui.components.CustomButton
@@ -36,9 +38,10 @@ import com.testtask.movieapplication.presentation.ui.theme.MyYellow
 import com.testtask.movieapplication.presentation.ui.theme.White50
 import com.testtask.movieapplication.presentation.ui.theme.BlackForBackground
 import com.testtask.movieapplication.presentation.ui.components.ClearFocusContainer
+import com.testtask.movieapplication.presentation.viewmodels.MovieViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, viewModel: MovieViewModel = hiltViewModel()) {
     val emailState = rememberSaveable { mutableStateOf("") }
     val passwordState = rememberSaveable { mutableStateOf("") }
 

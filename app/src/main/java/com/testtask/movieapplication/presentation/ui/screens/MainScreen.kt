@@ -32,9 +32,9 @@ fun MainScreen(navController: NavController){
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BlackForBackground) // Дублируем фон, если `Scaffold` перекрывает
+                .background(BlackForBackground)
                 .padding(paddingValues)
-                .padding(16.dp), // Внутренние отступ
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

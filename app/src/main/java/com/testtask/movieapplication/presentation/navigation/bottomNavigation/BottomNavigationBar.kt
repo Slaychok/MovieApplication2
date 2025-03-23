@@ -26,14 +26,13 @@ fun BottomNavigationBar(navController: NavController) {
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     Column {
-        // 🔹 Добавляем серую линию сверху
         HorizontalDivider(
-            color = GrayForIcons, // Серый цвет линии
-            thickness = 2.dp // Толщина линии
+            color = GrayForIcons,
+            thickness = 2.dp
         )
 
         NavigationBar(
-            containerColor = BlackForBackground, // Делаем фон черным
+            containerColor = BlackForBackground,
             contentColor = Color.White
         ) {
             items.forEach { item ->

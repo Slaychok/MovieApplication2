@@ -51,7 +51,7 @@ fun CustomTextField(
                 .height(50.dp)
                 .border(
                     width = 2.dp,
-                    color = animatedBorderColor, // Анимация границы
+                    color = animatedBorderColor,
                     shape = shape
                 )
                 .background(backgroundColor, shape)
@@ -64,7 +64,6 @@ fun CustomTextField(
                     .padding(horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Поле ввода текста (заполняет все доступное пространство)
                 BasicTextField(
                     value = text,
                     onValueChange = onTextChange,
@@ -77,17 +76,15 @@ fun CustomTextField(
                     singleLine = true,
                     visualTransformation = visualTransformation,
                     modifier = Modifier
-                        .weight(1f) // Занимает все свободное пространство
-                        .padding(end = 8.dp) // Отступ справа, чтобы не пересекаться с иконкой
+                        .weight(1f)
+                        .padding(end = 8.dp)
                 )
 
-                // Если trailingIcon передан, отображаем его
                 trailingIcon?.let {
                     it()
                 }
             }
 
-            // Placeholder (если текст пустой и нет фокуса)
             if (text.isEmpty() && !isFocused) {
                 placeholder?.let {
                     Box(modifier = Modifier.fillMaxWidth()) {

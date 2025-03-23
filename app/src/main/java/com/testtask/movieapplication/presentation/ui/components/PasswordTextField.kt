@@ -24,7 +24,7 @@ fun PasswordTextField(
     modifier: Modifier = Modifier
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
-    val interactionSource = remember { MutableInteractionSource() } // ✅ Отключаем Ripple
+    val interactionSource = remember { MutableInteractionSource() }
 
     CustomTextField(
         text = text,

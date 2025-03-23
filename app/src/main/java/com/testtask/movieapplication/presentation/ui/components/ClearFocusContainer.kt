@@ -19,8 +19,8 @@ fun ClearFocusContainer(
     Box(
         modifier = modifier
             .clickable(
-                indication = null, // Отключаем ripple эффект
-                interactionSource = interactionSource // Отключаем ripple-эффекты
+                indication = null,
+                interactionSource = interactionSource
             ) {
                 focusManager.clearFocus()
             }
