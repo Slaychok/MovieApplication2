@@ -25,9 +25,7 @@ fun ClearFocusContainer(
                 interactionSource = interactionSource
             ) {
                 focusManager.clearFocus()
-            },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            }
     ) {
         content()
     }

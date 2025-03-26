@@ -29,23 +29,24 @@ fun MainScreen(navController: NavController){
             .background(BlackForBackground),
         bottomBar = { BottomNavigationBar(mainNavController) }
     ) { paddingValues ->
-        Column(
+        NavHost(
+            navController = mainNavController,
+            startDestination = BottomItem.HomeScreen.route,
             modifier = Modifier
                 .fillMaxSize()
                 .background(BlackForBackground)
-                .padding(paddingValues)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+                .padding(paddingValues) // <-- ВАЖНО
         ) {
-            NavHost(
-                navController = mainNavController,
-                startDestination = BottomItem.HomeScreen.route,
-                modifier = Modifier.padding(paddingValues)
-            ) {
-                composable(BottomItem.HomeScreen.route) { MovieListScreen(navController) }
-                composable(BottomItem.SearchScreen.route) { SearchScreen(navController) }
-                composable(BottomItem.SettingsScreen.route) { SettingsScreen(navController) }
+            composable(BottomItem.HomeScreen.route) {
+                MovieListScreen(
+                    navController = navController,
+                )
+            }
+            composable(BottomItem.SearchScreen.route) {
+                SearchScreen(navController)
+            }
+            composable(BottomItem.SettingsScreen.route) {
+                SettingsScreen(navController)
             }
         }
     }
