@@ -43,7 +43,7 @@ fun MainScreen(navController: NavController){
                 startDestination = BottomItem.HomeScreen.route,
                 modifier = Modifier.padding(paddingValues)
             ) {
-                composable(BottomItem.HomeScreen.route) { HomeScreen(navController) }
+                composable(BottomItem.HomeScreen.route) { MovieListScreen(navController) }
                 composable(BottomItem.SearchScreen.route) { SearchScreen(navController) }
                 composable(BottomItem.SettingsScreen.route) { SettingsScreen(navController) }
             }

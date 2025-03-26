@@ -17,6 +17,7 @@ import com.testtask.movieapplication.presentation.ui.theme.GrayForIcons
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
+
     val items = listOf(
         BottomItem.HomeScreen,
         BottomItem.SearchScreen,

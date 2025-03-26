@@ -1,9 +1,6 @@
 package com.testtask.movieapplication.di
 
 import com.testtask.movieapplication.data.network.MovieApiService
-import com.testtask.movieapplication.data.repository.MovieRepositoryImpl
-import com.testtask.movieapplication.domain.repository.MovieRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -3,7 +3,6 @@ package com.testtask.movieapplication.presentation.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,31 +11,39 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.testtask.movieapplication.presentation.ui.components.ClearFocusContainer
+import com.testtask.movieapplication.presentation.ui.components.CustomText
+import com.testtask.movieapplication.presentation.ui.components.CustomTextField
 import com.testtask.movieapplication.presentation.ui.components.MovieCard
 import com.testtask.movieapplication.presentation.ui.theme.BlackForBackground
+import com.testtask.movieapplication.presentation.ui.theme.GrayForFont
 import com.testtask.movieapplication.presentation.viewmodels.MovieViewModel
 
 @Composable
-fun HomeScreen(navController: NavController, viewModel: MovieViewModel = hiltViewModel()) {
+fun MovieListScreen(navController: NavController, viewModel: MovieViewModel = hiltViewModel()) {
 
     val listState = rememberLazyListState()
     val movies = viewModel.movies.collectAsState()
     val isLoading = viewModel.isLoading.value
-    val searchText = rememberSaveable { mutableStateOf("") }
+    val searchQuery by viewModel.searchQuery.collectAsState()
 
     LaunchedEffect (Unit){
         viewModel.loadNextPage()
@@ -49,41 +56,29 @@ fun HomeScreen(navController: NavController, viewModel: MovieViewModel = hiltVie
         }
     }
 
-    Column(
+    ClearFocusContainer(
         modifier = Modifier
             .fillMaxSize()
             .background(BlackForBackground)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(16.dp)
     ) {
-        OutlinedTextField(
-            value = searchText.value,
-            onValueChange = { searchText.value = it },
-            placeholder = { Text("Поиск фильмов") },
-            modifier = Modifier.fillMaxWidth()
+        CustomTextField(
+            text = searchQuery,
+            onTextChange = { viewModel.onSearchQueryChanged(it) },
+            placeholder = { CustomText(text = "Поиск фильмов", fontSize = 16.sp, fontWeight = FontWeight.W400, color = GrayForFont) },
+            modifier = Modifier.fillMaxWidth(),
+            trailingIcon = {
+                if (searchQuery.isNotBlank()) {
+                    IconButton(onClick = {
+                        viewModel.clearSearch()
+                    }) {
+                        Icon(Icons.Default.Close, contentDescription = "Очистить")
+                    }
+                }
+            }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
-
-        Button(
-            onClick = {
-                if (searchText.value.isNotBlank()) {
-                    viewModel.searchMovies(searchText.value)
-                }
-            }
-        ) {
-            Text("Поиск")
-        }
-
-        Button(
-            onClick = {
-                searchText.value = ""
-                viewModel.clearSearch() // метод, который сбрасывает currentQuery = null и заново вызывает loadNextPage()
-            }
-        ) {
-            Text("Сброс")
-        }
 
         LazyColumn(
             state = listState,
@@ -110,6 +105,14 @@ fun HomeScreen(navController: NavController, viewModel: MovieViewModel = hiltVie
                     }
                 }
             }
+        }
+
+        if (!isLoading && movies.value.isEmpty()) {
+            Text(
+                text = "Ничего не найдено",
+                color = Color.White,
+                fontSize = 16.sp
+            )
         }
     }
 }

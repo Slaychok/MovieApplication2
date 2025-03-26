@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.graphics.SolidColor
+import com.testtask.movieapplication.presentation.ui.theme.GrayForContainer
 import com.testtask.movieapplication.presentation.ui.theme.GrayForFont
 import com.testtask.movieapplication.presentation.ui.theme.MyYellow
 
@@ -28,7 +29,7 @@ fun CustomTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     shape: RoundedCornerShape = RoundedCornerShape(15.dp),
-    backgroundColor: Color = Color.DarkGray,
+    backgroundColor: Color = GrayForContainer,
     textColor: Color = Color.White,
     borderColor: Color = Color.Transparent,
     focusedBorderColor: Color = MyYellow,

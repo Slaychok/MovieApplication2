@@ -9,6 +9,10 @@ import com.testtask.movieapplication.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,8 +29,26 @@ class MovieViewModel @Inject constructor(
     var isLoading = mutableStateOf(false)
         private set
 
-    private var isSearching = false
     private var currentQuery: String? = null
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery
+
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.value = query
+    }
+
+    init {
+        viewModelScope.launch {
+            _searchQuery
+                .debounce(500) // подождать 500мс после последнего ввода
+                .filter { it.isNotBlank() }
+                .distinctUntilChanged()
+                .collectLatest { query ->
+                    searchMovies(query)
+                }
+        }
+    }
 
     fun searchMovies(query: String) {
         if (query.isBlank()) return
@@ -72,6 +94,4 @@ class MovieViewModel @Inject constructor(
         _movies.value = emptyList()
         loadNextPage()
     }
-
-
 }
