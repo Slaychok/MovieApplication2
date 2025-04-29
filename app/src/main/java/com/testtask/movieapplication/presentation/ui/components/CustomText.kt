@@ -18,6 +18,7 @@ fun CustomText(
     fontWeight: FontWeight,
     textDecoration: TextDecoration? = null,
 ) {
+
     Text(
         text = text,
         fontSize = fontSize,

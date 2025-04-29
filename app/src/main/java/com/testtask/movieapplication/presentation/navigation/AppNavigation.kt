@@ -18,6 +18,7 @@ fun AppNavigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
+
         composable("login") { LoginScreen(navController) }
         composable("register") { RegisterScreen(navController) }
         composable("main") { MainScreen(navController) }
@@ -27,7 +28,7 @@ fun AppNavigation() {
         composable("movieDetail/{movieId}") { backStackEntry ->
             val movieId = backStackEntry.arguments?.getString("movieId")?.toIntOrNull()
             if (movieId != null) {
-                MovieDetailScreen(navController, movieId = movieId)
+                MovieDetailScreen(movieId)
             }
         }
     }
