@@ -41,7 +41,7 @@ class MovieViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _searchQuery
-                .debounce(500) // подождать 500мс после последнего ввода
+                .debounce(500)
                 .filter { it.isNotBlank() }
                 .distinctUntilChanged()
                 .collectLatest { query ->

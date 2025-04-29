@@ -5,13 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -67,7 +64,6 @@ fun MovieListScreen(navController: NavController, viewModel: MovieViewModel = hi
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
 
-            // Поисковое поле
             CustomTextField(
                 text = searchQuery,
                 onTextChange = { viewModel.onSearchQueryChanged(it) },
@@ -93,7 +89,6 @@ fun MovieListScreen(navController: NavController, viewModel: MovieViewModel = hi
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Контентная область
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)) {
@@ -142,66 +137,3 @@ fun MovieListScreen(navController: NavController, viewModel: MovieViewModel = hi
         }
     }
 }
-
-
-//    ClearFocusContainer(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(BlackForBackground)
-//            .padding(16.dp)
-//    ) {
-//        CustomTextField(
-//            text = searchQuery,
-//            onTextChange = { viewModel.onSearchQueryChanged(it) },
-//            placeholder = { CustomText(text = "Поиск фильмов", fontSize = 16.sp, fontWeight = FontWeight.W400, color = GrayForFont) },
-//            modifier = Modifier.fillMaxWidth(),
-//            trailingIcon = {
-//                if (searchQuery.isNotBlank()) {
-//                    IconButton(onClick = {
-//                        viewModel.clearSearch()
-//                    }) {
-//                        Icon(Icons.Default.Close, contentDescription = "Очистить")
-//                    }
-//                }
-//            }
-//        )
-//
-//        Spacer(modifier = Modifier.height(8.dp))
-//
-//        LazyColumn(
-//            state = listState,
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.spacedBy(16.dp)
-//        ) {
-//            items(movies.value) { movie ->
-//                MovieCard(
-//                    movie = movie,
-//                    onClick = { navController.navigate("movieDetail/${movie.id}") },
-//                    modifier = Modifier.fillMaxWidth()
-//                )
-//            }
-//
-//            if (isLoading) {
-//                item {
-//                    Box(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(16.dp),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        CircularProgressIndicator()
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (!isLoading && movies.value.isEmpty()) {
-//            Text(
-//                text = "Ничего не найдено",
-//                color = Color.White,
-//                fontSize = 16.sp
-//            )
-//        }
-//    }
-
-
