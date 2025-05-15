@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.testtask.movieapplication"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -81,12 +81,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.7.0")
-
-    implementation("org.postgresql:postgresql:42.7.3")
-    implementation("com.h2database:h2:2.2.224")
-    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
-}
+    implementation("io.coil-kt:coil-compose:2.7.0")}
 
 kapt {
     correctErrorTypes = true
