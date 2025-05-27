@@ -43,13 +43,13 @@ import com.testtask.movieapplication.presentation.ui.theme.MyYellow
 import com.testtask.movieapplication.presentation.ui.theme.White50
 import com.testtask.movieapplication.presentation.ui.theme.BlackForBackground
 import com.testtask.movieapplication.presentation.ui.components.ClearFocusContainer
-import com.testtask.movieapplication.presentation.viewmodels.MovieViewModel
+import com.testtask.movieapplication.presentation.viewmodels.MovieListViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun LoginScreen(navController: NavController, viewModel: MovieViewModel = hiltViewModel()) {
+fun LoginScreen(navController: NavController, viewModel: MovieListViewModel = hiltViewModel()) {
     val emailState = rememberSaveable { mutableStateOf("") }
     val passwordState = rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current

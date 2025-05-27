@@ -81,7 +81,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.7.0")}
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
+}
 
 kapt {
     correctErrorTypes = true

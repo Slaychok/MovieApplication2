@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.testtask.movieapplication.presentation.ui.components.CustomText
 import com.testtask.movieapplication.presentation.ui.theme.MovieApplicationTheme
-import com.testtask.movieapplication.presentation.ui.theme.ThemeSwitcher
 
 @Composable
 fun SettingsScreen(navController: NavController) {
@@ -49,7 +48,7 @@ fun SettingsScreen(navController: NavController) {
                     fontWeight = FontWeight.Normal,
                     color = MaterialTheme.colorScheme.onBackground
                 )
-                ThemeSwitcher()
+                //ThemeSwitcher()
             }
         }
     }
