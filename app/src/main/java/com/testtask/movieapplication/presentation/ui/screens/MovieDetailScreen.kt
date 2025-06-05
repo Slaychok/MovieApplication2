@@ -6,10 +6,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.testtask.movieapplication.domain.models.MovieDetails
 import com.testtask.movieapplication.presentation.ui.theme.BlackForBackground
 import com.testtask.movieapplication.presentation.viewmodels.MovieDetailViewModel
 
@@ -37,7 +40,7 @@ fun MovieDetailScreen(movieId: Int) {
 }
 
 @Composable
-fun MovieDetailContent(movieDetails: com.testtask.movieapplication.domain.models.MovieDetails) {
+fun MovieDetailContent(movieDetails: MovieDetails) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,19 +52,27 @@ fun MovieDetailContent(movieDetails: com.testtask.movieapplication.domain.models
             text = movieDetails.title ?: "No Title Available",
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            color = Color.White
         )
         Spacer(modifier = Modifier.height(8.dp))
 
         // Poster
-        AsyncImage(
-            model = movieDetails.poster ?: "", // Handle the case where the poster URL is null/empty
-            contentDescription = "Movie Poster",
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp), // Set the desired height for the poster
-            contentScale = androidx.compose.ui.layout.ContentScale.Crop // Or other suitable ContentScale
-        )
+                .wrapContentHeight(),
+            contentAlignment = Alignment.Center
+        ) {
+            AsyncImage(
+                model = movieDetails.poster ?: "",
+                contentDescription = "Movie Poster",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 250.dp, max = 400.dp), // Гибкие границы высоты
+                contentScale = ContentScale.Fit // Важно: используем Fit вместо Crop
+            )
+        }
         Spacer(modifier = Modifier.height(16.dp))
 
         // Year and Country
@@ -69,8 +80,8 @@ fun MovieDetailContent(movieDetails: com.testtask.movieapplication.domain.models
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Year: ${movieDetails.year ?: "N/A"}")
-            Text(text = "Country: ${movieDetails.country ?: "N/A"}")
+            Text(text = "Year: ${movieDetails.year ?: "N/A"}", color = Color.White)
+            Text(text = "Country: ${movieDetails.country ?: "N/A"}", color = Color.White)
         }
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -79,28 +90,28 @@ fun MovieDetailContent(movieDetails: com.testtask.movieapplication.domain.models
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "IMDB Rating: ${movieDetails.imdbRating ?: "N/A"}")
-            Text(text = "Runtime: ${movieDetails.runtime ?: "N/A"}")
+            Text(text = "IMDB Rating: ${movieDetails.imdbRating ?: "N/A"}", color = Color.White)
+            Text(text = "Runtime: ${movieDetails.runtime ?: "N/A"}", color = Color.White)
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         // Genres
-        Text(text = "Genres:", style = MaterialTheme.typography.titleMedium)
-        Text(text = movieDetails.genres?.joinToString(", ") ?: "N/A")
+        Text(text = "Genres:", style = MaterialTheme.typography.titleMedium, color = Color.White)
+        Text(text = movieDetails.genres?.joinToString(", ") ?: "N/A",Modifier.fillMaxWidth() , color = Color.White)
         Spacer(modifier = Modifier.height(8.dp))
 
         // Plot
-        Text(text = "Plot:", style = MaterialTheme.typography.titleMedium)
-        Text(text = movieDetails.plot ?: "No plot available")
+        Text(text = "Plot:", style = MaterialTheme.typography.titleMedium, color = Color.White)
+        Text(text = movieDetails.plot ?: "No plot available", color = Color.White)
         Spacer(modifier = Modifier.height(16.dp))
 
         // Actors
-        Text(text = "Actors:", style = MaterialTheme.typography.titleMedium)
-        Text(text = movieDetails.actors ?: "N/A")
+        Text(text = "Actors:", style = MaterialTheme.typography.titleMedium, color = Color.White)
+        Text(text = movieDetails.actors ?: "N/A", color = Color.White)
         Spacer(modifier = Modifier.height(8.dp))
 
         // Director
-        Text(text = "Director:", style = MaterialTheme.typography.titleMedium)
-        Text(text = movieDetails.director ?: "N/A")
+        Text(text = "Director:", style = MaterialTheme.typography.titleMedium, color = Color.White)
+        Text(text = movieDetails.director ?: "N/A", color = Color.White)
     }
 }

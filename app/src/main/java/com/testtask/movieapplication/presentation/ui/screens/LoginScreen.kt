@@ -57,9 +57,8 @@ fun LoginScreen(navController: NavController, viewModel: MovieListViewModel = hi
     ClearFocusContainer(
         modifier = Modifier
             .fillMaxSize()
-
             .background(BlackForBackground)
-            .padding(16.dp),
+            .padding(16.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

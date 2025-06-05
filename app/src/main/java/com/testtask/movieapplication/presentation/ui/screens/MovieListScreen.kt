@@ -39,7 +39,10 @@ import com.testtask.movieapplication.presentation.ui.theme.GrayForFont
 import com.testtask.movieapplication.presentation.viewmodels.MovieListViewModel
 
 @Composable
-fun MovieListScreen(navController: NavController, viewModel: MovieListViewModel = hiltViewModel()) {
+fun MovieListScreen(
+    navController: NavController,
+    viewModel: MovieListViewModel = hiltViewModel()
+) {
     val listState = rememberLazyListState()
     val movies = viewModel.movies.collectAsState()
     val isLoading = viewModel.isLoading.value

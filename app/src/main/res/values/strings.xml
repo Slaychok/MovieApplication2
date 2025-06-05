@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">MovieApplication</string>
-    <string name="login_text">Welcome back to PlayZone! Enter your email address and your password to enjoy the latest features of PlayZone</string>
-    <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
-    <string name="have_not_account">Don\'t have account?</string>
-    <string name="create_one">Create one</string>
-    <string name="create_account">Create an Account</string>
-    <string name="username">Username</string>
+    <string name="login_text">Добро пожаловать в Киносправочник! Пожалуйста войдите в свой аккаунт или зарегестрируйтесь.</string>
+    <string name="email_address">Email адресс</string>
+    <string name="password">Пароль</string>
+    <string name="have_not_account">Нет аккаунта?</string>
+    <string name="create_one">Создать сейчас</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="username">Имя пользователя</string>
     <string name="no_rating">Без рейтинга</string>
     <string name="no_name">Без названия</string>
-    <string name="login_now">Login now</string>
+    <string name="login_now">Войти сейчас</string>
 </resources>

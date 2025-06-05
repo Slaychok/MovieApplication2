@@ -3,6 +3,7 @@ package com.testtask.movieapplication.presentation.navigation.bottomNavigation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -19,7 +20,7 @@ import com.testtask.movieapplication.presentation.ui.theme.GrayForIcons
 fun BottomNavigationBar(navController: NavController) {
 
     val items = listOf(
-        BottomItem.HomeScreen,
+        BottomItem.ProfileScreen,
         BottomItem.SearchScreen,
         BottomItem.SettingsScreen
     )
@@ -33,7 +34,7 @@ fun BottomNavigationBar(navController: NavController) {
         )
 
         NavigationBar(
-            containerColor = BlackForBackground,
+            containerColor = MaterialTheme.colorScheme.onBackground,
             contentColor = Color.White
         ) {
             items.forEach { item ->
@@ -45,7 +46,7 @@ fun BottomNavigationBar(navController: NavController) {
                         Icon(
                             painter = painterResource(id = item.iconId),
                             contentDescription = item.route,
-                            tint = if (isSelected) Color.White else GrayForIcons
+                            tint = if (isSelected) MaterialTheme.colorScheme.onSurface else GrayForIcons
                         )
                     },
                     colors = NavigationBarItemDefaults.colors(

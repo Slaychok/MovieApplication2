@@ -8,5 +8,6 @@ data class Movie(
     val country: String?,
     val imdb_rating: String?,
     val genres: List<String>?,
-    val images: List<String>?
+    val images: List<String>?,
+    val isFavourite: Boolean? = false
 )

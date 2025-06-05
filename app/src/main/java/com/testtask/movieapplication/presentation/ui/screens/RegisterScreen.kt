@@ -137,19 +137,19 @@ fun RegisterScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-//            CustomTextField(
-//                text = userNameState.value,
-//                onTextChange = { userNameState.value = it },
-//                placeholder = {
-//                    CustomText(
-//                        text = stringResource(R.string.username),
-//                        fontSize = 16.sp,
-//                        fontWeight = FontWeight.Normal,
-//                        color = GrayForFont
-//                    )
-//                },
-//                modifier = Modifier.fillMaxWidth()
-//            )
+            CustomTextField(
+                text = userNameState.value,
+                onTextChange = { userNameState.value = it },
+                placeholder = {
+                    CustomText(
+                        text = stringResource(R.string.username),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = GrayForFont
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 

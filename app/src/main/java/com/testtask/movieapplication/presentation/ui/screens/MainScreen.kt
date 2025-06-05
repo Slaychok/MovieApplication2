@@ -3,6 +3,7 @@ package com.testtask.movieapplication.presentation.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,33 +17,40 @@ import com.testtask.movieapplication.presentation.navigation.bottomNavigation.Bo
 import com.testtask.movieapplication.presentation.ui.theme.BlackForBackground
 
 @Composable
-fun MainScreen(navController: NavController){
+fun MainScreen(navController: NavController,
+               isDarkTheme: Boolean,
+               onToggleTheme: () -> Unit
+){
     val mainNavController = rememberNavController()
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(BlackForBackground),
+            .background(MaterialTheme.colorScheme.onBackground),
         bottomBar = { BottomNavigationBar(mainNavController) }
     ) { paddingValues ->
         NavHost(
             navController = mainNavController,
-            startDestination = BottomItem.HomeScreen.route,
+            startDestination = BottomItem.ProfileScreen.route,
             modifier = Modifier
                 .fillMaxSize()
-                .background(BlackForBackground)
+                .background(MaterialTheme.colorScheme.onBackground)
                 .padding(paddingValues)
         ) {
-            composable(BottomItem.HomeScreen.route) {
-                MovieListScreen(
+            composable(BottomItem.ProfileScreen.route) {
+                ProfileScreen(
                     navController = navController,
                 )
             }
             composable(BottomItem.SearchScreen.route) {
-                SearchScreen(navController)
+                MovieListScreen(navController)
             }
             composable(BottomItem.SettingsScreen.route) {
-                SettingsScreen(navController)
+                SettingsScreen(
+                    navController = navController,
+                    isDarkTheme = isDarkTheme,
+                    onToggleTheme = onToggleTheme
+                )
             }
         }
     }
