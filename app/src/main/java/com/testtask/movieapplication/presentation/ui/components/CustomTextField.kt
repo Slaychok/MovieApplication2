@@ -15,6 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.graphics.SolidColor
 import com.testtask.movieapplication.presentation.ui.theme.GrayForContainer
@@ -23,6 +24,7 @@ import com.testtask.movieapplication.presentation.ui.theme.MyYellow
 
 @Composable
 fun CustomTextField(
+    onFocusChange: (Boolean) -> Unit = {}, // Добавьте этот параметр
     text: String,
     onTextChange: (String) -> Unit,
     placeholder: @Composable (() -> Unit)? = null,
@@ -79,6 +81,9 @@ fun CustomTextField(
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp)
+                        .onFocusChanged { state ->
+                            onFocusChange(state.isFocused)
+                        }
                 )
 
                 trailingIcon?.let {

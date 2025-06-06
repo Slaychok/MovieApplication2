@@ -89,6 +89,10 @@ dependencies {
     // Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
 
+    implementation("androidx.datastore:datastore-preferences:1.0.0") // Для DataStore
+    implementation("androidx.compose.material:material-icons-extended:1.5.4") // Иконки
+    // остальные ваши зависимости
+
     implementation(project(":data"))
     implementation(project(":domain"))
 }

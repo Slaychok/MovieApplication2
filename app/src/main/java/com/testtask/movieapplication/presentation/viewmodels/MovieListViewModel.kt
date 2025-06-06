@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.testtask.movieapplication.domain.models.Movie
 import com.testtask.movieapplication.domain.repository.MovieRepository
+import com.testtask.movieapplication.manager.SearchHistoryManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
+    private val searchHistoryManager: SearchHistoryManager
 ) : ViewModel() {
 
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
@@ -34,8 +37,38 @@ class MovieListViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
 
+
+    private val _searchHistory = MutableStateFlow<Set<String>>(emptySet())
+    val searchHistory: StateFlow<Set<String>> = _searchHistory.asStateFlow()
+
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
+    }
+
+    init {
+        loadSearchHistory()
+    }
+
+    fun deleteSearchQuery(query: String) {
+        viewModelScope.launch {
+            searchHistoryManager.deleteSearchQuery(query)
+            loadSearchHistory() // Обновляем историю после удаления
+        }
+    }
+
+    fun clearSearchHistory() {
+        viewModelScope.launch {
+            searchHistoryManager.clearSearchHistory()
+            _searchHistory.value = emptySet() // Обновляем UI
+        }
+    }
+
+    fun loadSearchHistory() {
+        viewModelScope.launch {
+            searchHistoryManager.searchHistoryFlow.collect { history ->
+                _searchHistory.value = history
+            }
+        }
     }
 
     init {
@@ -52,6 +85,12 @@ class MovieListViewModel @Inject constructor(
 
     fun searchMovies(query: String) {
         if (query.isBlank()) return
+
+        viewModelScope.launch {
+            // Сохраняем запрос в историю
+            searchHistoryManager.saveSearchQuery(query)
+        }
+
         currentQuery = query
         currentPage = 1
         isLastPage = false
